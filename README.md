@@ -59,7 +59,8 @@ We tested the distance estimation model at several known distances using measure
 | 3.0                 | 3.51                   | 0.51      |
 | 4.0                 | 4.81                   | 0.81      |
 
-<img src="https://github.com/tmin002/IoT25-HW07/blob/main/graph.png" width="500">
+![graph (1)](https://github.com/user-attachments/assets/61374be6-f0d8-4d67-b289-7e2c6fb1977d)
+
 
 ### Analysis
 
