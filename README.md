@@ -62,6 +62,23 @@ We tested the distance estimation model at several known distances using measure
 ![graph (1)](https://github.com/user-attachments/assets/61374be6-f0d8-4d67-b289-7e2c6fb1977d)
 
 
+### Test video
+
+Serial Monitor<br>
+[![Watch the video](https://img.youtube.com/vi/PsfHGMFpzy0/0.jpg)](https://youtu.be/PsfHGMFpzy0)
+<br>
+
+LED blinking demonstration based on proximity<br>
+[![Watch the video](https://img.youtube.com/vi/Xlhx_D0ntHQ/0.jpg)](https://youtu.be/Xlhx_D0ntHQ)
+<br>
+
 ### Analysis
 
-The initial model our team built, which used `txPower = 0` and `n = 4.58`, resulted in significant overestimation of distances and was not suitable for practical use. One major issue was the use of an arbitrary `txPower` value (0 dBm), which did not reflect the actual signal strength observed at a known reference distance. In BLE-based distance estimation, `txPower` should represent the expected RSSI at a distance of 1 meter, as it serves as the baseline for the path-loss model. In our environment, the average RSSI at 1 meter was measured to be approximately `-58 dBm`, and we updated our model accordingly. After calibrating the model by setting `txPower = -58 dBm` and adjusting the path-loss exponent to `n = 2.2`, the distance estimates aligned much more closely with the actual values. Most measurements now fall within ±0.8 meters of the true distance, and the estimate at 1 meter is exactly accurate. As expected, minor errors increase with distance due to RSSI fluctuations, but overall the model performs reliably for short-range BLE-based distance estimation.
+Based on our test results, the distance estimation model demonstrates reasonable accuracy with some expected variations. The model performs particularly well in the middle range (1.35m to 2.25m) with errors less than 0.25m, which is quite acceptable for indoor BLE-based distance estimation.
+
+Key observations:
+1. The model shows higher accuracy in the 1-2 meter range, which is the most common use case for proximity detection.
+2. There are some larger errors at the extremes (0.45m and 2.70m), which is typical in BLE-based distance estimation due to signal reflection and environmental interference.
+3. The average error across all measurements is approximately 0.53m, which is within acceptable limits for most proximity-based applications.
+
+The results validate our approach of using a path-loss model with a calibrated txPower and path-loss exponent. While there are some variations in the measurements, the overall performance is satisfactory for practical applications like proximity detection and basic distance monitoring.
